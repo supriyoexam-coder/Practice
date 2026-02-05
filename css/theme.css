@@ -1,0 +1,207 @@
+/* ================================
+   GLOBAL TONE
+================================ */
+body {
+  background: linear-gradient(135deg, #eef2f7, #f8fafc);
+}
+
+/* ================================
+   APP CONTAINER
+================================ */
+.app {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ================================
+   HEADER NAVIGATION
+================================ */
+.app-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #6490f0;
+}
+
+.nav-btn {
+  background: linear-gradient(135deg, #64748b, #475569);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  background: linear-gradient(135deg, #475569, #334155);
+}
+
+.header-title {
+  margin: 0;
+  margin-left: auto;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* ================================
+   HOME CARDS
+================================ */
+.card {
+  background: linear-gradient(180deg, #ffffff, #f7f9fc);
+  border: 1px solid #e3e8f0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(47, 109, 246, 0.15);
+}
+
+.card h3 {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #1f2937;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+.btn {
+  background: linear-gradient(135deg, #2f6df6, #1e4ed8);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(47, 109, 246, 0.35);
+  transition: all 0.15s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #1e4ed8, #1e40af);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(30, 78, 216, 0.45);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* ================================
+   TEST AREA
+================================ */
+#testView {
+  padding-top: 10px;
+  animation: fadeIn 0.25s ease;
+}
+
+.topic-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.counter {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #475569;
+}
+
+/* ================================
+   QUESTION
+================================ */
+.question {
+  font-weight: bold;
+  color: #0f172a;
+  letter-spacing: 0.5px;
+}
+
+/* ================================
+   ANSWER BOX
+================================ */
+.answer-box {
+  height: 90px;
+  width: 320px;
+  max-width: 90%;
+  margin: 0 auto;
+  background: #f9fafb;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.answer-box:hover {
+  background: #f0f6ff;
+  border-color: #2f6df6;
+}
+
+.answer-box .hint,
+.answer-box .answer {
+  position: absolute;
+  transition: opacity 0.15s ease;
+}
+
+.answer-box .answer {
+  opacity: 0;
+  color: #16a34a;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+.answer-box:hover .hint {
+  opacity: 0;
+}
+
+.answer-box:hover .answer {
+  opacity: 1;
+}
+
+/* ================================
+   CONTROLS
+================================ */
+.control-btn {
+  background: linear-gradient(135deg, #2f6df6, #1e4ed8);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(47, 109, 246, 0.35);
+  transition: all 0.15s ease;
+}
+
+.control-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(30, 78, 216, 0.45);
+}
+
+.control-btn.back {
+  background: linear-gradient(135deg, #64748b, #475569);
+}
+
+.control-btn.next {
+  background: linear-gradient(135deg, #2f6df6, #1e40af);
+}
+
+/* ================================
+   ANIMATION
+================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

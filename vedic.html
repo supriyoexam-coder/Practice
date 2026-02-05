@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vedic Maths – Practice</title>
+
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+</head>
+
+<body>
+
+    <header class="app-header">
+        <button class="nav-btn" onclick="location.href='index.html'">← Chapters</button>
+        <h1 class="header-title">Vedic Maths</h1>
+    </header>
+
+    <div class="app">
+
+        <!-- HOME -->
+        <div id="homeView">
+
+            <div class="card">
+                <h3>Addition</h3>
+                <button class="btn" onclick="start('add3n2')">2-Digit</button>
+                <button class="btn" onclick="start('add3n3')">3-Digit</button>
+                <button class="btn" onclick="start('add3n4')">4-Digit</button>
+            </div>
+
+            <div class="card">
+                <h3>Subtraction</h3>
+                <button class="btn" onclick="start('sub2')">2-Digit</button>
+                <button class="btn" onclick="start('sub3')">3-Digit</button>
+                <button class="btn" onclick="start('sub4')">4-Digit</button>
+            </div>
+
+            <div class="card">
+                <h3>Add & Sub (3 numbers)</h3>
+                <button class="btn" onclick="start('mix3n2')">2-Digit</button>
+                <button class="btn" onclick="start('mix3n3')">3-Digit</button>
+            </div>
+
+            <div class="card">
+                <h3>Patterns</h3>
+                <button class="btn" onclick="start('abba')">ab + ba</button>
+                <button class="btn" onclick="start('absub')">ab − ba</button>
+            </div>
+
+            <div class="card">
+                <h3>Decimals</h3>
+                <button class="btn" onclick="start('decadd')">Addition</button>
+                <button class="btn" onclick="start('decsub')">Subtraction</button>
+                <button class="btn" onclick="start('mul_decimal_5')">
+                    Multiplication
+                </button>
+
+            </div>
+            <div class="card">
+                <h3>Squares and Cubes</h3>
+                <button class="btn" onclick="start('square')">
+                    Square of a number (1–125)
+                </button>
+                <button class="btn" onclick="start('cube')">
+                    Cube of a number (1–30)
+                </button>
+            </div>
+            <div class="card">
+                <h3>Roots</h3>
+                <button class="btn" onclick="start('sqrt')">
+                    Square Root
+                </button>
+                <button class="btn" onclick="start('cuberoot')">
+                    Cube Root
+                </button>
+            </div>
+            <div class="card">
+                <h3>Percentages</h3>
+                <button class="btn" onclick="start('pct_to_frac')">
+                    Percentage → Fraction
+                </button>
+                <button class="btn" onclick="start('pct_of')">Percentage of a Number</button>
+            </div>
+            <div class="card">
+                <h3>Multiplication (Vedic)</h3>
+                <button class="btn" onclick="start('mul_2x1')">2-digit × 1-digit</button>
+                <button class="btn" onclick="start('mul_3x1')">3-digit × 1-digit</button>
+
+                <button class="btn" onclick="start('mul_2x2')">2-digit × 2-digit</button>
+                <button class="btn" onclick="start('mul_3x3')">3-digit × 3-digit</button>
+            </div>
+            <div class="card">
+                <h3>Special Multipliers</h3>
+                <button class="btn" onclick="start('mul_special_5')">
+                    ×5 / ×25 / ×75 / ×125
+                </button>
+
+                <button class="btn" onclick="start('mul_special_rep')">
+                    ×11 / ×22 / ×33 / ×44
+                </button>
+                <button class="btn" onclick="start('mul_end5')">Ending with 5</button>
+            </div>
+            <div class="card">
+                <h3>Pattern Multiplication</h3>
+                <button class="btn" onclick="start('mul_consecutive')">Consecutive Numbers</button>
+                <button class="btn" onclick="start('mul_diff_even')">Even Difference</button>
+                <button class="btn" onclick="start('mul_same10')">Same tens, sum 10</button>
+
+                <button class="btn" onclick="start('mul_near_100')">
+                    Base Method (Near 100)
+                </button>
+            </div>
+
+
+        </div>
+
+        <!-- TEST -->
+        <div id="testView">
+            <div class="topic-title" id="topicTitle"></div>
+            <div class="counter">Solved: <span id="count">0</span></div>
+
+            <div class="question" id="question"></div>
+
+            <div class="answer-box">
+                <div class="hint">Hover to verify answer</div>
+                <div class="answer" id="answer"></div>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn back" onclick="goHome()">Back</button>
+                <button class="control-btn next" onclick="generate()">Next</button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- UNIVERSAL JS -->
+    <script src="js/script.js"></script>
+
+    <!-- TEST LOGIC (UNCHANGED, INLINE) -->
+    <script>
+        function rand(d) {
+            return Math.floor(Math.random() * (9 * Math.pow(10, d - 1))) + Math.pow(10, d - 1);
+        }
+
+        function randDecPair() {
+            const type = Math.floor(Math.random() * 3);
+
+            function makeDec(digits) {
+                const min = Math.pow(10, digits - 1);
+                const max = Math.pow(10, digits) - 1;
+                return +((Math.random() * (max - min) + min).toFixed(1));
+            }
+
+            let a, b;
+
+            if (type === 0) {
+                a = makeDec(2);
+                b = makeDec(2);
+            } else if (type === 1) {
+                a = makeDec(3);
+                b = makeDec(3);
+            } else {
+                if (Math.random() < 0.5) {
+                    a = makeDec(3);
+                    b = makeDec(2);
+                } else {
+                    a = makeDec(2);
+                    b = makeDec(3);
+                }
+            }
+            return [a, b];
+        }
+
+        function randMultipleOf(k) {
+            return k * (Math.floor(Math.random() * 90) + 10);
+        }
+
+        function generate() {
+            let q = "", a = 0, x, y, z;
+
+            if (mode === "add3n2") { x = rand(2); y = rand(2); z = rand(2); a = x + y + z; q = `${x}+${y}+${z}`; }
+            if (mode === "add3n3") { x = rand(3); y = rand(3); z = rand(3); a = x + y + z; q = `${x}+${y}+${z}`; }
+            if (mode === "add3n4") { x = rand(4); y = rand(4); z = rand(4); a = x + y + z; q = `${x}+${y}+${z}`; }
+
+            if (mode === "sub2") { x = rand(2); y = rand(2); if (x < y) [x, y] = [y, x]; a = x - y; q = `${x}−${y}`; }
+            if (mode === "sub3") { x = rand(3); y = rand(3); if (x < y) [x, y] = [y, x]; a = x - y; q = `${x}−${y}`; }
+            if (mode === "sub4") { x = rand(4); y = rand(4); if (x < y) [x, y] = [y, x]; a = x - y; q = `${x}−${y}`; }
+
+            if (mode === "mix3n2") {
+                x = rand(2); y = rand(2); z = rand(2); const r = Math.floor(Math.random() * 3);
+                a = r === 0 ? (x - y + z) : r === 1 ? (x + y - z) : (x - y - z);
+                q = r === 0 ? `${x}-${y}+${z}` : r === 1 ? `${x}+${y}-${z}` : `${x}-${y}-${z}`;
+
+
+            }
+            if (mode === "mix3n3") {
+                x = rand(3); y = rand(3); z = rand(3); const r = Math.floor(Math.random() * 3);
+                a = r === 0 ? (x - y + z) : r === 1 ? (x + y - z) : (x - y - z);
+                q = r === 0 ? `${x}-${y}+${z}` : r === 1 ? `${x}+${y}-${z}` : `${x}-${y}-${z}`;
+
+
+            }
+
+            if (mode === "abba") {
+                x = Math.floor(Math.random() * 9) + 1;
+                y = Math.floor(Math.random() * 9) + 1;
+                a = (x * 10 + y) + (y * 10 + x);
+                q = `${x}${y}+${y}${x}`;
+            }
+
+            if (mode === "absub") {
+                x = Math.floor(Math.random() * 9) + 1;
+                y = Math.floor(Math.random() * 9) + 1;
+                let p = x * 10 + y, m = y * 10 + x;
+                a = Math.abs(p - m);
+                q = `${Math.max(p, m)}−${Math.min(p, m)}`;
+            }
+
+            if (mode === "decadd") {
+                [x, y] = randDecPair();
+                a = (x + y).toFixed(1);
+                q = `${x} + ${y}`;
+            }
+
+            if (mode === "decsub") {
+                [x, y] = randDecPair();
+                if (x < y) [x, y] = [y, x];
+                a = (x - y).toFixed(1);
+                q = `${x} − ${y}`;
+            }
+
+            if (mode === "square") { x = Math.floor(Math.random() * 125) + 1; a = x * x; q = `${x}²`; }
+            if (mode === "cube") { x = Math.floor(Math.random() * 30) + 1; a = x * x * x; q = `${x}³`; }
+            if (mode === "sqrt") { x = Math.floor(Math.random() * 125) + 1; a = x; q = `√${x * x}`; }
+            if (mode === "cuberoot") { x = Math.floor(Math.random() * 100) + 1; a = x; q = `∛${x * x * x}`; }
+
+            if (mode === "mul_2x1") { x = rand(2); y = Math.floor(Math.random() * 9) + 1; a = x * y; q = `${x} × ${y}`; }
+            if (mode === "mul_2x2") { x = rand(2); y = rand(2); a = x * y; q = `${x} × ${y}`; }
+            if (mode === "mul_3x1") { x = rand(3); y = Math.floor(Math.random() * 9) + 1; a = x * y; q = `${x} × ${y}`; }
+            if (mode === "mul_3x3") { x = rand(3); y = rand(3); a = x * y; q = `${x} × ${y}`; }
+
+            if (mode === "mul_consecutive") { x = rand(2); a = x * (x + 1); q = `${x} × ${x + 1}`; }
+            if (mode === "mul_decimal_5") {
+
+                const decimals = [0.5, 1.5, 2.5, 3.5, 4.5, 1.25, 2.25, 3.75, 4.25, 5.75];
+                const d = decimals[Math.floor(Math.random() * decimals.length)];
+
+                let divisor = 2;
+                if (d % 1 === 0.25 || d % 1 === 0.75) divisor = 4;
+
+                const digits = [2, 3];
+                let x = rand(digits[Math.floor(Math.random() * digits.length)]);
+
+                x = Math.floor(x / divisor) * divisor;
+
+                a = x * d;
+                q = `${x} × ${d}`;
+            }
+            if (mode === "mul_special_5") {
+                const multipliers = [5, 25, 75, 125];
+                const m = multipliers[Math.floor(Math.random() * multipliers.length)];
+
+                const digits = [2, 3];
+                let x = rand(digits[Math.floor(Math.random() * digits.length)]);
+
+                if (m === 25) x = Math.floor(x / 4) * 4;
+                if (m === 75) x = Math.floor(x / 4) * 4;
+                if (m === 125) x = Math.floor(x / 8) * 8;
+
+                a = x * m;
+                q = `${x} × ${m}`;
+            }
+            if (mode === "mul_special_rep") {
+                const multipliers = [11, 22, 33, 44];
+                const m = multipliers[Math.floor(Math.random() * multipliers.length)];
+
+                const digits = [2, 3, 4];
+                const x = rand(digits[Math.floor(Math.random() * digits.length)]);
+
+                a = x * m;
+                q = `${x} × ${m}`;
+            }
+            if (mode === "mul_end5") {
+                const digits = [2];
+                let x = rand(digits[Math.floor(Math.random() * digits.length)]);
+
+                if (x % 2 !== 0) x++;
+
+                let y = rand(digits[Math.floor(Math.random() * digits.length)]);
+                y = Math.floor(y / 10) * 10 + 5;
+
+                a = x * y;
+                q = `${x} × ${y}`;
+            }
+
+            if (mode === "mul_diff_even") {
+                const diffs = [2, 4, 6, 8, 10];
+                const d = diffs[Math.floor(Math.random() * diffs.length)];
+
+                const mid = rand(2);
+                x = mid - d / 2;
+                y = mid + d / 2;
+
+                if (x < 10) {
+                    x += d;
+                    y += d;
+                }
+
+                a = x * y;
+                q = `${x} × ${y}`;
+            }
+            if (mode === "mul_same10") {
+                const t = Math.floor(Math.random() * 9) + 1;
+                const u = Math.floor(Math.random() * 9);
+
+                x = t * 10 + u;
+                y = t * 10 + (10 - u);
+
+                a = x * y;
+                q = `${x} × ${y}`;
+            }
+            if (mode === "mul_near_100") {
+                const base = 100;
+                const range = 15;
+
+                const d1 = Math.floor(Math.random() * (2 * range + 1)) - range;
+                const d2 = Math.floor(Math.random() * (2 * range + 1)) - range;
+
+                if (d1 === 0 && d2 === 0) {
+                    d2 = 5;
+                }
+
+                x = base + d1;
+                y = base + d2;
+
+                a = x * y;
+                q = `${x} × ${y}`;
+            }
+            if (mode === "pct_to_frac") {
+
+                const table = [
+                    [1, 2],
+                    [1, 3], [2, 3],
+                    [1, 4], [3, 4],
+                    [1, 5], [2, 5], [3, 5], [4, 5],
+                    [1, 6], [5, 6],
+                    [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7],
+                    [1, 8], [3, 8], [5, 8], [7, 8],
+                    [1, 9], [2, 9], [4, 9], [5, 9], [7, 9], [8, 9],
+                    [1, 10], [3, 10], [7, 10], [9, 10],
+                    [1, 11], [2, 11], [3, 11], [4, 11], [5, 11],
+                    [6, 11], [7, 11], [8, 11], [9, 11], [10, 11],
+                    [1, 12], [5, 12], [7, 12], [11, 12],
+                    [1, 13], [2, 13],
+                    [1, 14], [3, 14], [5, 14],
+                    [1, 15], [2, 15], [4, 15], [7, 15], [8, 15], [11, 15], [13, 15], [14, 15],
+                    [1, 16], [3, 16], [5, 16], [7, 16], [9, 16], [11, 16], [13, 16], [15, 16],
+                    [1, 17], [2, 17],
+                    [1, 18],
+                    [1, 19], [2, 19],
+                    [1, 20], [3, 20],
+                    [1, 21], [2, 21],
+                    [1, 25], [2, 25], [3, 25], [4, 25],
+                    [1, 30],
+                    [1, 40],          // ✅ NEW
+                    [1, 50],          // ✅ NEW
+                    [1, 100]          // ✅ NEW
+                ];
+
+                const pick = table[Math.floor(Math.random() * table.length)];
+                const num = pick[0];
+                const den = pick[1];
+
+                const percent = ((num / den) * 100).toFixed(2);
+
+                q = `${percent}% = ?`;
+                a = `${num} / ${den}`;
+            }
+            if (mode === "pct_of") {
+
+                const table = [
+                    [1, 2],
+                    [1, 3], [2, 3],
+                    [1, 4], [3, 4],
+                    [1, 5], [2, 5], [3, 5], [4, 5],
+                    [1, 6], [5, 6],
+                    [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7],
+                    [1, 8], [3, 8], [5, 8], [7, 8],
+                    [1, 9], [2, 9], [4, 9], [5, 9], [7, 9], [8, 9],
+                    [1, 10], [3, 10], [7, 10], [9, 10],
+                    [1, 11], [2, 11], [3, 11], [4, 11], [5, 11],
+                    [6, 11], [7, 11], [8, 11], [9, 11], [10, 11],
+                    [1, 12], [5, 12], [7, 12], [11, 12],
+                    [1, 13], [2, 13],
+                    [1, 14], [3, 14], [5, 14],
+                    [1, 15], [2, 15], [4, 15], [7, 15], [8, 15], [11, 15], [13, 15], [14, 15],
+                    [1, 16], [3, 16], [5, 16], [7, 16], [9, 16], [11, 16], [13, 16], [15, 16],
+                    [1, 17], [2, 17],
+                    [1, 18],
+                    [1, 19], [2, 19],
+                    [1, 20], [3, 20],
+                    [1, 21], [2, 21],
+                    [1, 25], [2, 25], [3, 25], [4, 25],
+                    [1, 30],
+                    [1, 40],          // ✅ NEW
+                    [1, 50],          // ✅ NEW
+                    [1, 100]          // ✅ NEW
+                ];
+
+                const pick = table[Math.floor(Math.random() * table.length)];
+                const num = pick[0];
+                const den = pick[1];
+
+                const multiplier = Math.floor(Math.random() * 9) + 2;
+                x = den * multiplier;
+
+                const percent = ((num / den) * 100).toFixed(2);
+
+                a = (x * num) / den;
+                q = `${percent}% of ${x}`;
+            }
+
+            document.getElementById("question").innerText = q;
+            document.getElementById("answer").innerText = a;
+            answer.dataset.done = "";
+
+        }
+        window.solved = 0;
+        answer.parentElement.onmouseenter = () => !answer.dataset.done && (answer.dataset.done = 1, document.getElementById("count").innerText = ++solved);
+
+
+    </script>
+
+
+</body>
+
+</html>
